@@ -17,7 +17,7 @@ export default class ProductPage{
 
 
     // actions
-    public async verifyProductName(productName: string): Promise<void>{
+    public async expectProductName(productName: string): Promise<void>{
         await expect(this.productName).toHaveText(productName);
     }
 }
