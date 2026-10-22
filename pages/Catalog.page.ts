@@ -11,6 +11,8 @@ export default class CatalogPage {
     readonly productName: Locator;
     readonly productNotFound: Locator;
 
+    readonly productPrice: Locator;
+
 
 
 
@@ -24,6 +26,8 @@ export default class CatalogPage {
         this.headerSearchedFor = this.page.getByTestId('search-caption');
         this.productName = this.page.getByTestId('product-name');
         this.productNotFound = this.page.getByText('There are no products found.');
+
+        this.productPrice = this.page.getByTestId('product-price');
 
     }
 
@@ -52,23 +56,30 @@ export default class CatalogPage {
     public async getAllMatchedItems(): Promise<string[]> {
         await this.expectHeaderSearchedForIsVisible();
         await expect(this.productName.first()).toBeVisible();
-        return await this.getProductName();
+        return await this.getProductNames();
     }
 
     public async expectNoResultsMessage(): Promise<void> {
         await expect(this.productNotFound).toBeVisible();
     }
 
-    public async getProductName(): Promise<string[]> {
+    public async getProductNames(): Promise<string[]> {
         const names = await this.productName.allTextContents();
         return names.map(name => name.trim());
     }
 
     public async getFirstProductName(): Promise<string> {
-        const firstProductName = await this.productName.first();
+        const firstProductName = this.productName.first();
         await expect(firstProductName).toBeVisible();
         const name = await firstProductName.innerText();
         return name.trim();
+    }
+
+    public async getFirstProductPrice(): Promise<string> {
+        const firstProductPrice = this.productPrice.first()
+        await expect(firstProductPrice).toBeVisible();
+        const price = await firstProductPrice.innerText();
+        return price.trim().replace('$', '');
     }
 
     public async clickProductItem(): Promise<void> {

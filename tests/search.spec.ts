@@ -26,3 +26,5 @@ test('search with no matches that returns no products found message', async ({ p
     await expect(catalogPage.productName).toHaveCount(0);
 })
 
+//Updated goal 5: search for a term, click the x reset button, 
+// and the catalog shows the full list again.
