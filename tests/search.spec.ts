@@ -1,9 +1,9 @@
-import { test, expect } from '@playwright/test'
+import {  expect } from '@playwright/test'
 import CatalogPage from '../pages/Catalog.page';
+import { test } from '../fixtures/myTest'
 
-test('search the pliers items', async ({ page }) => {
+test('search the pliers items', async ({ page , catalogPage }) => {
     const itemName = 'pliers';
-    const catalogPage = new CatalogPage(page);
     await catalogPage.goto();
     await catalogPage.search(itemName);
 
@@ -16,9 +16,7 @@ test('search the pliers items', async ({ page }) => {
 })
 
 
-test('search with no matches that returns no products found message', async ({ page }) => {
-    const catalogPage = new CatalogPage(page);
-    await catalogPage.goto();
+test('search with no matches that returns no products found message', async ({ page, catalogPage }) => {
     await catalogPage.search('nothing');
 
     await catalogPage.expectNoResultsMessage();
@@ -26,5 +24,31 @@ test('search with no matches that returns no products found message', async ({ p
     await expect(catalogPage.productName).toHaveCount(0);
 })
 
-//Updated goal 5: search for a term, click the x reset button, 
-// and the catalog shows the full list again.
+//Updated goal 5: search for a term, click the x reset button,
+//  and the catalog shows the full list again.
+
+test('The "x" button reset the list after search', async ({ page , catalogPage}) => {
+    const itemName = 'pliers';
+
+    await catalogPage.expectProductsVisible();
+    const originalNames = await catalogPage.getProductNames();
+
+    await catalogPage.search(itemName);
+    await catalogPage.expectSearchCompleted();
+
+    const searchedNames = await catalogPage.getProductNames();
+
+    expect(originalNames).not.toEqual(searchedNames);
+    await catalogPage.clickResetSearch();
+
+    await expect(page.locator('[data-test="search-caption"]'))
+        .toHaveCount(0);
+
+
+    // Wait until the original product list is restored
+    await expect.poll(
+        async () => await catalogPage.getProductNames()
+    ).toEqual(originalNames);
+
+
+})

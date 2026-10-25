@@ -1,5 +1,5 @@
-import { test, expect } from '@playwright/test'
-
+import {  expect } from '@playwright/test'
+import { test } from '../fixtures/myTest'
 
 
 test('home page loads and shows product', async ({ page }) => {

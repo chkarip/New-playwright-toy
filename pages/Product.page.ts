@@ -1,19 +1,21 @@
-import {Page, Locator, expect} from '@playwright/test'
+import { Page, Locator, expect } from '@playwright/test'
 
 
-export default class ProductPage{
+export default class ProductPage {
     readonly page: Page;
     readonly productName: Locator;
     readonly productPrice: Locator;
 
 
 
-    constructor(page: Page){
+
+    constructor(page: Page) {
         this.page = page;
 
         //Locators
-        this.productName = this.page.getByRole('heading', {level: 1});
+        this.productName = this.page.getByRole('heading', { level: 1 });
         this.productPrice = this.page.getByLabel('unit-price'); // better with TestId though because label might change later for accesibility 
+
     }
 
 
