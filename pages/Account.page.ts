@@ -9,7 +9,7 @@ export default class AccountPage {
         this.page = page;
 
         //Locators
-        this.myAccountHeading = this.page.getByRole('heading', { level: 1, name: 'My account'});
+        this.myAccountHeading = this.page.getByText('Swag Labs');
     }
 
     //actions

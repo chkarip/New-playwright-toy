@@ -29,7 +29,7 @@ export default defineConfig({
   use: {
     testIdAttribute: 'data-test',
     /* Base URL to use in actions like `await page.goto('')`. */
-    baseURL: 'https://practicesoftwaretesting.com/',
+    baseURL: 'https://www.saucedemo.com/',
 
     trace: 'on-first-retry',
   },

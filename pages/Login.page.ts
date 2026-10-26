@@ -4,7 +4,7 @@ import { Page, Locator } from '@playwright/test'
 export default class LoginPage {
     readonly page: Page;
 
-    readonly emailInput: Locator;
+    readonly usernameInput : Locator;
     readonly passInput: Locator;
     readonly loginButton: Locator;
 
@@ -12,7 +12,7 @@ export default class LoginPage {
         this.page = page;
 
         //Locators 
-        this.emailInput = this.page.getByRole('textbox', { name: 'Email address' });
+        this.usernameInput  = this.page.getByRole('textbox', { name: 'Username' });
         this.passInput = this.page.getByRole('textbox', { name: 'Password' });
         this.loginButton = this.page.getByRole('button', {name: 'Login'});
 
@@ -23,7 +23,7 @@ export default class LoginPage {
     //actions
 
     public async fillEmailInput(input: string): Promise<void> {
-        await this.emailInput.fill(input);
+        await this.usernameInput.fill(input);
     }
 
     public async fillPassInput(input: string): Promise<void> {
