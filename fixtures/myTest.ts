@@ -1,11 +1,9 @@
 import { test as base } from '@playwright/test'
-import CatalogPage from '../pages/Catalog.page'
 import InventoryPage from '../pages/Inventory.page'
 import LoginPage from '../pages/Login.page'
 import AccountPage from '../pages/Account.page'
 
 type MyFixtures = {
-    catalogPage: CatalogPage;
     inventoryPage: InventoryPage;
     loginPage: LoginPage;
     accountPage: AccountPage;
@@ -13,11 +11,11 @@ type MyFixtures = {
 }
 
 export const test = base.extend<MyFixtures>({
-    catalogPage: async ({ page }, use) => {
-        const catalogPage = new CatalogPage(page);
-        await catalogPage.goto();
-        await use(catalogPage)
-    },
+    // catalogPage: async ({ page }, use) => {
+    //     const catalogPage = new CatalogPage(page);
+    //     await catalogPage.goto();
+    //     await use(catalogPage)
+    // },
     inventoryPage: async ({ page }, use) => {
         await use(new InventoryPage(page))
     },

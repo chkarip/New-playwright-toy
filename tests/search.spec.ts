@@ -1,5 +1,4 @@
 import {  expect } from '@playwright/test'
-import CatalogPage from '../pages/Catalog.page';
 import { test } from '../fixtures/myTest'
 
 test('search the pliers items', async ({ page , catalogPage }) => {
